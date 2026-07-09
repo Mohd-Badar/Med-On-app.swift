@@ -23,19 +23,19 @@ class CreateAccountViewController: UIViewController {
         
         nameView.layer.cornerRadius = 20
         nameView.layer.borderWidth = 1
-        nameView.layer.borderColor = UIColor.systemBlue.cgColor
+        nameView.layer.borderColor = UIColor.lightGray.cgColor
         
         numberView.layer.cornerRadius = 20
         numberView.layer.borderWidth = 1
-        numberView.layer.borderColor = UIColor.systemBlue.cgColor
+        numberView.layer.borderColor = UIColor.lightGray.cgColor
         
         emailview.layer.cornerRadius = 20
         emailview.layer.borderWidth = 1
-        emailview.layer.borderColor = UIColor.systemBlue.cgColor
+        emailview.layer.borderColor = UIColor.lightGray.cgColor
         
         passwordView.layer.cornerRadius = 20
         passwordView.layer.borderWidth = 1
-        passwordView.layer.borderColor = UIColor.systemBlue.cgColor
+        passwordView.layer.borderColor = UIColor.lightGray.cgColor
         
         createAccountBtn.layer.cornerRadius = 10
         createAccountBtn.backgroundColor = .systemBlue
@@ -44,6 +44,10 @@ class CreateAccountViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func createAccountBtn(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "TabBarVC") as! UITabBarController
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
     
 }
