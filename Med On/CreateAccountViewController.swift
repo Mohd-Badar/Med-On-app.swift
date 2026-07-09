@@ -45,6 +45,17 @@ class CreateAccountViewController: UIViewController {
     }
     @IBAction func createAccountBtn(_ sender: Any) {
         
+        let name = nameTextField.text ?? ""
+         let email = emailTextField.text ?? ""
+         let number = numberTextField.text ?? ""
+         let password = passwordTextField.text ?? ""
+         
+        
+         UserDefaults.standard.set(name, forKey: "name")
+         UserDefaults.standard.set(email, forKey: "email")
+         UserDefaults.standard.set(number, forKey: "number")
+         UserDefaults.standard.set(password, forKey: "password")
+        
         let vc = storyboard?.instantiateViewController(identifier: "TabBarVC") as! UITabBarController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)

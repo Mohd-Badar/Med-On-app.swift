@@ -58,10 +58,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         progressLine.transform = progressView.transform.scaledBy(x: 1, y: 2)
         
         tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        
+        let name = UserDefaults.standard.string(forKey: "name")
+           
+           nameLabel.text = name
 
         // Do any additional setup after loading the view.
     }
     @IBAction func addMedicineBtn(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "AddMedicineViewController") as! AddMedicineViewController
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
     
 }
