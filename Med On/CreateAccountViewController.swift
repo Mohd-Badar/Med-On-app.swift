@@ -21,6 +21,14 @@ class CreateAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        
+        if isLoggedIn {
+            let vc = storyboard?.instantiateViewController(identifier: "TabBarVC") as! UITabBarController
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: false)
+        }
+        
         nameView.layer.cornerRadius = 20
         nameView.layer.borderWidth = 1
         nameView.layer.borderColor = UIColor.lightGray.cgColor
@@ -56,9 +64,22 @@ class CreateAccountViewController: UIViewController {
          UserDefaults.standard.set(number, forKey: "number")
          UserDefaults.standard.set(password, forKey: "password")
         
+        if name.isEmpty || email.isEmpty || number.isEmpty || password.isEmpty {
+              
+              let alert = UIAlertController(title: "Error", message: "Please fill all the fields", preferredStyle: .alert)
+              
+              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+              
+              present(alert, animated: true)
+              return
+          }
+        
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        
         let vc = storyboard?.instantiateViewController(identifier: "TabBarVC") as! UITabBarController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
+        
     }
     
 }

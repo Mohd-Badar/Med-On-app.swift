@@ -33,12 +33,51 @@ class ProfileViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        nameLabel.text = UserDefaults.standard.string(forKey: "name")
+        emailLabel.text = UserDefaults.standard.string(forKey: "email")
+        numberLabel.text = UserDefaults.standard.string(forKey: "number")
+        
+        if let data = UserDefaults.standard.data(forKey: "userImage") {
+            profileImageView.image = UIImage(data: data)
+        }
+    }
 
     @IBAction func editProfileBtn(_ sender: Any) {
     }
     @IBAction func notificationBtn(_ sender: Any) {
     }
     @IBAction func logoutBtn(_ sender: Any) {
+        
+        let alert = UIAlertController(
+                title: "Log Out",
+                message: "Are you sure you want to logout?",
+                preferredStyle: .alert
+            )
+            
+            let yesAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
+              
+                UserDefaults.standard.removeObject(forKey: "name")
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "number")
+                UserDefaults.standard.removeObject(forKey: "password")
+                
+                UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                
+                let vc = self.storyboard?.instantiateViewController(identifier: "CreateAccountViewController") as! CreateAccountViewController
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+         
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(yesAction)
+            alert.addAction(cancelAction)
+       
+            present(alert, animated: true)
     }
     
 }

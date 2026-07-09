@@ -65,6 +65,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        nameLabel.text = UserDefaults.standard.string(forKey: "name") ?? "User"
+        
+        if let data = UserDefaults.standard.data(forKey: "userImage") {
+            userImageView.image = UIImage(data: data)
+        }
+    }
+    
+    
     @IBAction func addMedicineBtn(_ sender: Any) {
         
         let vc = storyboard?.instantiateViewController(identifier: "AddMedicineViewController") as! AddMedicineViewController
