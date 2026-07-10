@@ -13,6 +13,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        cellImage.layer.cornerRadius = cellImage.bounds.height / 2
         // Initialization code
     }
 

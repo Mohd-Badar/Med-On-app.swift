@@ -6,24 +6,113 @@
 //
 
 import UIKit
+import UserNotifications
+
+struct MedicineModel: Codable {
+    var name: String
+    var time: Date
+    var startDate: Date
+    var endDate: Date
+    var imageData: Data?
+}
+
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Medicine.count
-    }
+
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return medicines.count
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HomeTableViewCell
+        
+        let data = medicines[indexPath.row]
+        
+        cell.cellLabel.text = data.name
 
-        cell.cellLabel.text = Medicine[indexPath.row]
-        cell.cellImage.image = UIImage(named: Image[indexPath.row])
-
+        
+        if let imgData = data.imageData {
+            cell.cellImage.image = UIImage(data: imgData)
+        }
+        
         return cell
     }
     
-    var Medicine = ["Vitamin C", "Vitamin D", "Antibiotic", "Paracitamol", "Vitamin C", "Vitamin D", "Antibiotic", "Paracitamol"]
-    var Image = ["greenCapsule", "redCapsule", "yellowCapsule", "greenCapsule", "greenCapsule", "redCapsule", "yellowCapsule", "greenCapsule"]
+    func scheduleNotification(medicine: MedicineModel) {
+        
+        let center = UNUserNotificationCenter.current()
+        let calendar = Calendar.current
+        
+        var currentDate = medicine.startDate
+        
+        while currentDate <= medicine.endDate {
+           
+            let content = UNMutableNotificationContent()
+            content.title = "Medicine Reminder 💊"
+            content.body = "Take \(medicine.name)"
+            content.sound = .default
+            content.badge = 1
+            
+            let timeComp = calendar.dateComponents([.hour, .minute], from: medicine.time)
+            var dateComp = calendar.dateComponents([.year, .month, .day], from: currentDate)
+            
+            dateComp.hour = timeComp.hour
+            dateComp.minute = timeComp.minute
+            
+            guard let triggerDate = calendar.date(from: dateComp) else {
+                currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+                continue
+            }
+            
+            if triggerDate < Date() {
+                print("Skipped past time ❌")
+                currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+                continue
+            }
+          
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
+           
+            let request = UNNotificationRequest(
+                identifier: UUID().uuidString,
+                content: content,
+                trigger: trigger
+            )
+           
+            center.add(request) { error in
+                if let error = error {
+                    print("Error: \(error)")
+                } else {
+                    print("Notification Scheduled ✅")
+                }
+            }
+            
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+    }
+    
+    func saveMedicines() {
+        do {
+            let data = try JSONEncoder().encode(medicines)
+            UserDefaults.standard.set(data, forKey: "medicines")
+        } catch {
+            print("Encoding Error:", error)
+        }
+    }
+    
+    func loadMedicines() {
+        if let data = UserDefaults.standard.data(forKey: "medicines") {
+            do {
+                medicines = try JSONDecoder().decode([MedicineModel].self, from: data)
+            } catch {
+                print("Decoding Error:", error)
+            }
+        }
+    }
+    
+    
+    var medicines: [MedicineModel] = []
     
 
     @IBOutlet weak var tableView: UITableView!
@@ -38,6 +127,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var progressView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        loadMedicines()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -61,9 +153,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let name = UserDefaults.standard.string(forKey: "name")
            
-           nameLabel.text = name
+        nameLabel.text = name
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted {
+                print("Permission Granted ✅")
+            } else {
+                print("Permission Denied ❌")
+            }
+        }
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,12 +176,35 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    
     @IBAction func addMedicineBtn(_ sender: Any) {
         
         let vc = storyboard?.instantiateViewController(identifier: "AddMedicineViewController") as! AddMedicineViewController
+        
+        vc.delegate = self
+        
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
+}
+
+extension HomeViewController: AddMedicineDelegate {
+    
+    func didAddMedicine(_ medicine: MedicineModel) {
+        
+        func loadMedicines() {
+            if let data = UserDefaults.standard.data(forKey: "medicines") {
+                do {
+                    medicines = try JSONDecoder().decode([MedicineModel].self, from: data)
+                } catch {
+                    print("Decoding Error:", error)
+                }
+            }
+        }
+        medicines.append(medicine)
+        saveMedicines()
+        tableView.reloadData()
+        
+        scheduleNotification(medicine: medicine)
+    }
 }
