@@ -59,11 +59,6 @@ class CreateAccountViewController: UIViewController {
          let password = passwordTextField.text ?? ""
          
         
-         UserDefaults.standard.set(name, forKey: "name")
-         UserDefaults.standard.set(email, forKey: "email")
-         UserDefaults.standard.set(number, forKey: "number")
-         UserDefaults.standard.set(password, forKey: "password")
-        
         if name.isEmpty || email.isEmpty || number.isEmpty || password.isEmpty {
               
               let alert = UIAlertController(title: "Error", message: "Please fill all the fields", preferredStyle: .alert)
@@ -73,6 +68,11 @@ class CreateAccountViewController: UIViewController {
               present(alert, animated: true)
               return
           }
+        
+        UserDefaults.standard.set(name, forKey: "name")
+        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(number, forKey: "number")
+        UserDefaults.standard.set(password, forKey: "password")
         
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
         

@@ -8,6 +8,10 @@
 import UIKit
 import UserNotifications
 
+protocol DeleteMedicineDelegate: AnyObject {
+    func didDeleteMedicine(at index: Int)
+}
+
 struct MedicineModel: Codable {
     var name: String
     var time: Date
@@ -38,6 +42,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "DeleteMedicineViewController") as! DeleteMedicineViewController
+        
+        vc.selectedMedicine = medicines[indexPath.row]
+        vc.selectedIndex = indexPath.row
+        vc.delegate = self
+        
+        present(vc, animated: true)
     }
     
     func scheduleNotification(medicine: MedicineModel) {
@@ -125,6 +140,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var progressLine: UIProgressView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var progressView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -206,5 +222,15 @@ extension HomeViewController: AddMedicineDelegate {
         tableView.reloadData()
         
         scheduleNotification(medicine: medicine)
+    }
+}
+
+extension HomeViewController: DeleteMedicineDelegate {
+    
+    func didDeleteMedicine(at index: Int) {
+        
+        medicines.remove(at: index)     
+        saveMedicines()
+        tableView.reloadData()
     }
 }

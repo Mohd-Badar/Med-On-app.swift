@@ -69,6 +69,7 @@ class ProfileViewController: UIViewController {
                 
                 let vc = self.storyboard?.instantiateViewController(identifier: "CreateAccountViewController") as! CreateAccountViewController
                 vc.modalPresentationStyle = .fullScreen
+                
                 self.present(vc, animated: true)
             }
          

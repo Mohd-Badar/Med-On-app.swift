@@ -818,6 +818,98 @@
             </objects>
             <point key="canvasLocation" x="2612.9770992366412" y="-215.49295774647888"/>
         </scene>
+        <!--Delete Medicine View Controller-->
+        <scene sceneID="ewZ-KU-6au">
+            <objects>
+                <viewController storyboardIdentifier="DeleteMedicineViewController" id="1a6-V5-cUx" customClass="DeleteMedicineViewController" customModule="Med_On" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P2g-7s-cfH">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Xsi-lN-IVB">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bif-fa-b9U">
+                                <rect key="frame" x="146.66666666666666" y="160" width="100" height="100"/>
+                                <color key="backgroundColor" red="0.40361919709999999" green="0.3618792462" blue="1" alpha="0.39023297489999997" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Qhf-F1-3xC"/>
+                                    <constraint firstAttribute="width" constant="100" id="qlZ-5b-lp1"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medicine Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ve-kk-uVN">
+                                <rect key="frame" x="110.33333333333333" y="80" width="172.33333333333337" height="28.666666666666671"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dZ-tG-E4S">
+                                <rect key="frame" x="20" y="80" width="40" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Afv-68-Nro"/>
+                                    <constraint firstAttribute="width" constant="40" id="VX1-ik-x69"/>
+                                </constraints>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="&lt;"/>
+                                <connections>
+                                    <action selector="backBtn:" destination="wtx-BX-95G" eventType="touchUpInside" id="G3E-pb-wjp"/>
+                                    <action selector="backBtn:" destination="1a6-V5-cUx" eventType="touchUpInside" id="RDK-JB-NLv"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fP-SF-r4F">
+                                <rect key="frame" x="20" y="270" width="353" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXZ-Il-7CR">
+                                <rect key="frame" x="20" y="344" width="353" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="84e-Qk-Meq"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete Medicine"/>
+                                <connections>
+                                    <action selector="deleteBtn:" destination="1a6-V5-cUx" eventType="touchUpInside" id="PoK-6t-Cdq"/>
+                                    <action selector="saveMedicineBtn:" destination="wtx-BX-95G" eventType="touchUpInside" id="Gd0-jU-QGN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eg8-HM-rZy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5ve-kk-uVN" firstAttribute="centerX" secondItem="Xsi-lN-IVB" secondAttribute="centerX" id="3KL-NZ-fTZ"/>
+                            <constraint firstItem="7dZ-tG-E4S" firstAttribute="leading" secondItem="P2g-7s-cfH" secondAttribute="leading" constant="20" id="50j-3V-EQp"/>
+                            <constraint firstItem="Xsi-lN-IVB" firstAttribute="leading" secondItem="eg8-HM-rZy" secondAttribute="leading" id="6cf-UQ-1ED"/>
+                            <constraint firstItem="5fP-SF-r4F" firstAttribute="top" secondItem="bif-fa-b9U" secondAttribute="bottom" constant="10" id="6ia-lH-U6W"/>
+                            <constraint firstItem="eg8-HM-rZy" firstAttribute="trailing" secondItem="PXZ-Il-7CR" secondAttribute="trailing" constant="20" id="71d-Lc-7Ia"/>
+                            <constraint firstItem="bif-fa-b9U" firstAttribute="centerX" secondItem="5ve-kk-uVN" secondAttribute="centerX" id="8Cq-cv-CD5"/>
+                            <constraint firstItem="7dZ-tG-E4S" firstAttribute="top" secondItem="P2g-7s-cfH" secondAttribute="top" constant="80" id="Bmk-d3-jeZ"/>
+                            <constraint firstItem="Xsi-lN-IVB" firstAttribute="top" secondItem="P2g-7s-cfH" secondAttribute="top" id="LdP-99-SWj"/>
+                            <constraint firstItem="5ve-kk-uVN" firstAttribute="top" secondItem="P2g-7s-cfH" secondAttribute="top" constant="80" id="M6C-e5-G3I"/>
+                            <constraint firstItem="eg8-HM-rZy" firstAttribute="trailing" secondItem="5fP-SF-r4F" secondAttribute="trailing" constant="20" id="PFu-n0-b3Z"/>
+                            <constraint firstItem="5fP-SF-r4F" firstAttribute="leading" secondItem="eg8-HM-rZy" secondAttribute="leading" constant="20" id="U5j-Hi-CGT"/>
+                            <constraint firstItem="PXZ-Il-7CR" firstAttribute="leading" secondItem="eg8-HM-rZy" secondAttribute="leading" constant="20" id="azc-9f-x26"/>
+                            <constraint firstItem="eg8-HM-rZy" firstAttribute="trailing" secondItem="Xsi-lN-IVB" secondAttribute="trailing" id="b48-Nx-5Q1"/>
+                            <constraint firstAttribute="bottom" secondItem="Xsi-lN-IVB" secondAttribute="bottom" id="g4z-nV-V7k"/>
+                            <constraint firstItem="PXZ-Il-7CR" firstAttribute="top" secondItem="5fP-SF-r4F" secondAttribute="bottom" constant="50" id="g8x-Kb-BIu"/>
+                            <constraint firstItem="bif-fa-b9U" firstAttribute="top" secondItem="5ve-kk-uVN" secondAttribute="top" constant="80" id="ma8-gA-bie"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deleteBtn" destination="PXZ-Il-7CR" id="a3a-TM-xgn"/>
+                        <outlet property="medicineImage" destination="bif-fa-b9U" id="c3j-mL-ow8"/>
+                        <outlet property="medicineName" destination="5fP-SF-r4F" id="gM2-6K-KJL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yaq-Zs-cAn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2613" y="-875"/>
+        </scene>
         <!--Add Medicine View Controller-->
         <scene sceneID="IcY-c8-hEG">
             <objects>
@@ -970,7 +1062,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cCp-S1-T8H">
-                                <rect key="frame" x="36" y="456.66666666666669" width="30" height="28.666666666666686"/>
+                                <rect key="frame" x="36" y="456.66666666666669" width="30" height="28.666666666666742"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="gnT-fJ-6Gi"/>
@@ -1068,7 +1160,7 @@
                             <constraint firstItem="wRx-sN-I7y" firstAttribute="top" secondItem="D34-NC-lpE" secondAttribute="bottom" constant="40" id="37R-9S-hd0"/>
                             <constraint firstItem="3se-3H-viY" firstAttribute="top" secondItem="VrO-Jc-0NP" secondAttribute="bottom" constant="30" id="3fy-IJ-X2D"/>
                             <constraint firstItem="I1L-BU-NPh" firstAttribute="trailing" secondItem="wRx-sN-I7y" secondAttribute="trailing" constant="20" id="3pz-vN-wfc"/>
-                            <constraint firstItem="oAe-0w-WkV" firstAttribute="top" secondItem="6eL-Xi-ZkY" secondAttribute="top" constant="160" id="4j6-hp-gJU"/>
+                            <constraint firstItem="oAe-0w-WkV" firstAttribute="top" secondItem="hVH-fa-brK" secondAttribute="top" constant="80" id="4j6-hp-gJU"/>
                             <constraint firstItem="pui-le-HQN" firstAttribute="top" secondItem="hVH-fa-brK" secondAttribute="bottom" constant="115" id="5ff-cz-XC4"/>
                             <constraint firstItem="eIb-z1-ah8" firstAttribute="leading" secondItem="6eL-Xi-ZkY" secondAttribute="leading" constant="20" id="7ER-d7-qro"/>
                             <constraint firstItem="3se-3H-viY" firstAttribute="leading" secondItem="I1L-BU-NPh" secondAttribute="leading" constant="20" id="86Z-a1-lyJ"/>
