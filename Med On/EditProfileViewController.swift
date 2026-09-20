@@ -1,9 +1,8 @@
-//
+
 //  EditProfileViewController.swift
-//  Med On
-//
+//  Med On App
 //  Created by Mohd Badar on 09/07/26.
-//
+
 
 import UIKit
 
