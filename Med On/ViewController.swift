@@ -1,10 +1,6 @@
-//
 //  ViewController.swift
 //  Med On App
-//
-//  Created by Mohd Badar on 09/07/26.
-//
-
+//  Created by Mohd Badar on 09/07/26
 
 import UIKit
 
